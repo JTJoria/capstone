@@ -1,0 +1,2 @@
+class SituationCategoriesController < ApplicationController
+end

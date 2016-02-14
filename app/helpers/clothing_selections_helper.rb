@@ -1,0 +1,2 @@
+module ClothingSelectionsHelper
+end

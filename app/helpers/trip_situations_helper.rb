@@ -1,0 +1,2 @@
+module TripSituationsHelper
+end
