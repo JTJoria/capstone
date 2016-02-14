@@ -1,28 +1,31 @@
 Rails.application.routes.draw do
 
-  devise_for :creators
-root "packing#index"
+devise_for :creators
 
-  get '/packing' => 'packing#index' 
-  get '/packing/new' => 'packing#new'
-  post '/packing' => 'packing#create'
-  get '/packing/:id' => 'packing#show'
-  get '/packing/:id/edit' => 'packing#edit'
-  patch '/packing/:id' => 'packing#update'
-  delete '/packing/:id' => 'packing#destroy'
+root 'packing#index'
 
+  get '/persons' => 'persons#index' 
+  get '/persons/new' => 'persons#new'
   post '/persons' => 'persons#create'
   get '/persons/:id' => 'persons#show'
+  get '/persons/:id/edit' => 'persons#edit'
+  patch '/persons/:id' => 'persons#update'
+  delete '/persons/:id' => 'persons#destroy'
 
-  get '/locations' => 'locations#index'
+  get '/locations' => 'locations#index' 
+  get '/locations/new' => 'locations#new'
   post '/locations' => 'locations#create'
-  delete 'locations/:id' => 'locations#destroy'
-  
+  get '/locations/:id' => 'locations#show'
+  get '/locations/:id/edit' => 'locations#edit'
+  patch '/locations/:id' => 'locations#update'
+  delete '/locations/:id' => 'locations#destroy'
 
+  get '/trip_situations' => 'trip_situations#index' 
   get '/trip_situations/new' => 'trip_situations#new'
-  post '/trip_situations/:id' => 'trip_situations#create'
+  post '/trip_situations' => 'trip_situations#create'
+  get '/trip_situations/:id' => 'trip_situations#show'
   get '/trip_situations/:id/edit' => 'trip_situations#edit'
-  patch '/trip_situations/:id' => 'image#update'
+  patch '/trip_situations/:id' => 'trip_situations#update'
   delete '/trip_situations/:id' => 'trip_situations#destroy'
 
 end

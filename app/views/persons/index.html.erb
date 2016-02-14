@@ -1,0 +1,14 @@
+<h1>All Your Trip Mates: </h1>
+
+<div class = "row">
+<% @persons.each do |person| %>
+  <div class="col-md-4 col-sm-6 list-view">
+      <div class = "thumbnail">
+        <h3>Name: <%= person.name %></h3>
+        <h3>Gender: <%= person.gender %></h3>
+        <h3>Age: <%= person.age %></h3>
+        <a href= "/persons/<%= person.id %>">
+      </div>
+    </div>  
+  <% end %>
+</div>
