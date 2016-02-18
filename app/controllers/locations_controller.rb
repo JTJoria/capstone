@@ -9,7 +9,7 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new({destionation: params[:destionation], zipcode: params[:zipcode], start_day: params[:start_day], end_day: params[:end_day]})
+    @location = Location.new({destination: params[:destionation], zipcode: params[:zipcode], start_day: params[:start_day], end_day: params[:end_day]})
 
     @location.save
 

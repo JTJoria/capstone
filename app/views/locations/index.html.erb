@@ -1,0 +1,31 @@
+<h1>Where are you going?</h1>
+
+<div class="form-group">
+  <%= label_tag :City %>
+  <%= text_field_tag :City %>
+</div>
+
+<div class="form-group">
+  <%= label_tag :State %>
+  <%= text_field_tag :State %>
+</div>
+
+<div class="form-group">
+  <%= label_tag :zip_code %>
+  <%= text_field_tag :zip_code %>
+</div>
+
+<div class="form-group">
+  <%= label_tag :Start_Date %>
+  <%= text_field_tag :Start_Date %>
+</div>
+
+<div class="form-group">
+  <%= label_tag :End_Date %>
+  <%= text_field_tag :End_Date %>
+</div>
+
+
+<%= link_to "Home", "/persons" %>
+<%= link_to "Add Special Plans", "/trip_situations" %>
+<%= link_to "What Should I Pack?", "/results" %>

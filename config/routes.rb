@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 devise_for :creators
 
-root 'packing#index'
+root 'creators#index'
 
   get '/persons' => 'persons#index' 
   get '/persons/new' => 'persons#new'
@@ -27,5 +27,9 @@ root 'packing#index'
   get '/trip_situations/:id/edit' => 'trip_situations#edit'
   patch '/trip_situations/:id' => 'trip_situations#update'
   delete '/trip_situations/:id' => 'trip_situations#destroy'
+
+  get '/results' => 'results#index'
+
+  get '/weathers' => 'weathers#index'
 
 end

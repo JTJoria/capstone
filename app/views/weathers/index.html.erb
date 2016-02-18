@@ -1,0 +1,28 @@
+<h1>Weather</h1>
+
+<%= form_tag "/weather", method: :get do %>
+  <%= label_tag :city%>
+  <%= text_field_tag :city %>
+  <%= label_tag :state%>
+  <%= text_field_tag :state %>
+  <%= submit_tag "Check Weather" %>
+<% end %>
+
+
+<h1>Five Day Forecast</h1>
+
+<h2>Location: <%= @city.titleize %>, <%= @state.upcase %></h2>
+
+<%= image_tag @image %>
+<hr>
+<% @forecasts.each do |forecast| %>
+
+
+  <h2>Date: <%= forecast["date"] %></h2>
+  <h2>Day: <%= forecast["day"] %></h2>
+  <h2>High: <%= forecast["high"] %>˚ F</h2>
+  <h2>Low: <%= forecast["low"] %>˚ F</h2>
+  <h2>Conditions: <%= forecast["text"] %></h2>
+  <hr>
+
+  <% end %>
