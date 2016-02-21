@@ -1,7 +1,7 @@
 class TripSituationsController < ApplicationController
 
   def index
-
+    @persons = Person.all
   end
 
   def show

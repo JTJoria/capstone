@@ -7,7 +7,7 @@
 
 <div class="form-group">
   <%= label_tag :State %>
-  <%= text_field_tag :State %>
+  <%= select_tag :state, options_for_select(us_states) %>
 </div>
 
 <div class="form-group">
@@ -40,5 +40,4 @@ $(function() {
 
 
 <%= link_to "Home", "/persons" %>
-<%= link_to "Add Special Plans", "/trip_situations" %>
-<%= link_to "What Should I Pack?", "/clothing_selections?event_id=3" %>
+<%= link_to "What Are Your Plans", "/trip_situations" %>

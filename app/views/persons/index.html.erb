@@ -4,7 +4,7 @@
 <% @persons.each do |person| %>
   <div class="col-md-4 col-sm-6 list-view">
       <div class = "thumbnail">
-        <h2><a href="/persons/<%= person.id %>"><%= person.name %></a></h2>
+        <h2><a href="/persons/<%= person.id %>/edit"><%= person.name %></a></h2>
         <h3>Gender: <%= person.gender %></h3>
         <h3>Age: <%= person.age %></h3>
       </div>
@@ -16,12 +16,3 @@
 <a href="/persons/new">Add New Trip Mate<span class="btn btn-default"></span></a>
 
 <a href="/locations">Where Are You Going?<span class="btn btn-default"></span></a>
-
-
-<!--<%= form_tag "/persons/new", method: :post do %>
-  <%= submit_tag "Add New Trip Mate", class: "btn btn-default" %>  
-<% end %> -->
-<!-- 
-<%= form_tag "/locations", method: :post do %>
-  <%= submit_tag "Tell us where you're going", class: "btn btn-default" %>  
-<% end %> -->
