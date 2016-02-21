@@ -1,0 +1,2 @@
+module OutfitCategoriesHelper
+end

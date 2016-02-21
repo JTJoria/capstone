@@ -28,7 +28,7 @@ root 'creators#index'
   patch '/trip_situations/:id' => 'trip_situations#update'
   delete '/trip_situations/:id' => 'trip_situations#destroy'
 
-  get '/results' => 'results#index'
+  get '/clothing_selections' => 'clothing_selections#index'
 
   get '/weathers' => 'weathers#index'
 

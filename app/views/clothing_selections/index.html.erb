@@ -1,0 +1,16 @@
+<h1>What You Should Pack</h1>
+
+<% @persons.each do |person| %>
+  <h2><%= person.name %></h2>
+
+<ul>
+  <% @outfits[person.id].each do |outfit|%>
+     <% outfit.garments.each do |garment| %>
+      <li><%= garment.name %> </li>
+      <% end %>
+  <% end %>
+</ul>
+
+<% end %>
+
+<%= link_to "Home", "/persons" %>
