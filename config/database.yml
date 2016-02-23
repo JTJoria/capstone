@@ -21,7 +21,7 @@ test:
   database: packing-app_test
 
 production:
-  <<: *default
-  database: packing-app_production
-  username: packing-app
-  password: <%= ENV['PACKING-APP_DATABASE_PASSWORD'] %>
+  database: packing-app-production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
