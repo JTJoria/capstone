@@ -1,0 +1,48 @@
+<h1>What Special Plans Do You Have?</h1>
+
+
+<% @persons.each do |person| %>
+
+  <%= person.name %>
+
+
+
+  <%= form_tag("/clothing_selections?event_id=3", method: "get") do %>
+
+    <div class = "column">
+
+      <%= check_box_tag(:nice_dinner, 1) %>
+      <%= label_tag(:nice_dinner, "Going out to a nice dinner") %>
+
+      <%= check_box_tag(:wedding, 2) %>
+      <%= label_tag(:wedding, "Wedding") %>
+
+      <%= check_box_tag(:beach, 3) %>
+      <%= label_tag(:beach, "Going to the beach") %>
+
+      <%= check_box_tag(:business_trip, 4) %>
+      <%= label_tag(:business_trip, "It's a business trip") %>
+
+      <%= check_box_tag(:sight_seeing, 5) %>
+      <%= label_tag(:sight_seeing, "Sight Seeing") %>
+
+      <%= check_box_tag(:relax, 6) %>
+      <%= label_tag(:relax, "Relaxing") %>
+
+      <%= check_box_tag(:hiking, 7) %>
+      <%= label_tag(:hiking, "Hiking") %>
+
+      <%= check_box_tag(:line_dancing, 8) %>
+      <%= label_tag(:line_dancing, "Line Dancing") %>
+
+    </div>
+
+    <div>
+      <%= submit_tag "What Should I Pack" %>
+    </div>
+    <%= hidden_field_tag(:length, @length) %>
+  <% end %>
+  <br>
+<% end %>
+
+<%= link_to "Home", "/persons" %>

@@ -2,16 +2,18 @@ class ClothingSelectionsController < ApplicationController
   def index
     @persons = Person.all
     @outfits  = []
+    @essentials = []
 
       @persons.each do |p|
         @outfits[p.id] = []
+        @essentials[p.id] = []
       end
 
     if params[:wedding] != nil
 
       @event = Situation.find (params[:wedding])
       @persons.each do |p|
-        @outfits[p.id].concat  FindOutfitsByCategories(@event.categories[0].id, p.gender)
+        @outfits[p.id].concat  FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
@@ -19,48 +21,86 @@ class ClothingSelectionsController < ApplicationController
 
       @event = Situation.find (params[:beach])
       @persons.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories[0].id, p.gender)
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    # if params[:sight_seeing] != nil
+    if params[:sight_seeing] != nil
 
-    #   @event = Situation.find (params[:sight_seeing])
-    #   @persons.each do |p|
-    #     @outfits[p.id].concat FindOutfitsByCategories(@event.categories[0].id, p.gender)
-    #   end
-    # end
+      @event = Situation.find (params[:sight_seeing])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
 
-    # if params[:business_trip] != nil
+    if params[:business_trip] != nil
 
-    #   @event = Situation.find (params[:business_trip])
-    #   @persons.each do |p|
-    #     @outfits[p.id].concat FindOutfitsByCategories(@event.categories[0].id, p.gender)
-    #   end
-    # end
+      @event = Situation.find (params[:business_trip])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
 
-    # if params[:nice_dinner] != nil
+    if params[:nice_dinner] != nil
 
-    #   @event = Situation.find (params[:nice_dinner])
-    #   @persons.each do |p|
-    #     @outfits[p.id].concat FindOutfitsByCategories(@event.categories[0].id, p.gender)
-    #   end
-    # end
+      @event = Situation.find (params[:nice_dinner])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
 
-    # if params[:relax] != nil
+    if params[:relax] != nil
 
-    #   @event = Situation.find (params[:relax])
-    #   @persons.each do |p|
-    #     @outfits[p.id].concat FindOutfitsByCategories(@event.categories[0].id, p.gender)
-    #   end
-    # end
+      @event = Situation.find (params[:relax])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
 
+
+    if params[:hiking] != nil
+
+      @event = Situation.find (params[:hiking])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
+
+
+    if params[:line_dancing] != nil
+
+      @event = Situation.find (params[:line_dancing])
+      @persons.each do |p|
+        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      end
+    end
+
+      @persons.each do |p|
+        if p.gender == 'Male'
+          category = Category.where('name = \'necessities male\'')
+        else
+          category = Category.where('name = \'necessities female\'')
+        end
+
+        garment_ids = GarmentCategory.where('category_id = ?', category[0].id)
+
+        garment_ids.each do |garment|
+          garment = Garment.find(garment.garment_id)
+          @essentials[p.id] << garment
+        end
+      
+      end
 
   end
 
-  def FindOutfitsByCategories(category_id, gender)
+  def FindOutfitsByCategories(category, gender)
 
-    outfit_ids = OutfitCategory.where('category_id = ?', category_id)
+    category_id = []
+    category.each do |c|
+      category_id << c.id
+    end
+
+    outfit_ids = OutfitCategory.where('category_id IN (?)', category_id).group(:outfit_id).order('count(*) DESC').limit(2)
     packing = {}
     outfits = []
 

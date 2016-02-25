@@ -9,7 +9,15 @@
 
 <body>
 
-<%= link_to "Log Out", "/creators/sign_out", method: :delete %>
+    <% if creator_signed_in? %>
+      <li> signed in: <%= @creators %></li>
+    <% else %>
+      <li><a href="/creators/sign_in">Sign In!</a></li>
+      <li><a href="/creators/sign_up">Sign Up!</a></li> 
+    <% end %>
+      <li><%= link_to "Sign Out", "/creators/sign_out", method: :delete if creator_signed_in? %></li>
+
+
 
 <%= yield %>
 

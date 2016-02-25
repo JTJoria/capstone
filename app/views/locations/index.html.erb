@@ -1,5 +1,7 @@
 <h1>Where are you going?</h1>
 
+<%= form_tag("/situations", method: "get") do %>
+
 <div class="form-group">
   <%= label_tag :City %>
   <%= text_field_tag :City %>
@@ -15,23 +17,25 @@
   <%= text_field_tag :zip_code %>
 </div>
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>jQuery UI Datepicker - Select a Date Range</title>
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
   $(function() {
+    var start_date = null;
+    var end_date = null;
     $( "#from" ).datepicker({
-      defaultDate: "+1w",
+      defaultDate: "+1d",
       changeMonth: true,
       numberOfMonths: 3,
       onClose: function( selectedDate ) {
         $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        start_date = new Date(selectedDate);
+        if (end_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
       }
     });
     $( "#to" ).datepicker({
@@ -40,24 +44,33 @@
       numberOfMonths: 3,
       onClose: function( selectedDate ) {
         $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        end_date = new Date(selectedDate);
+        if (start_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
       }
     });
   });
   </script>
-</head>
-<body>
+
  
 <label for="from">From</label>
 <input type="text" id="from" name="from">
 <label for="to">to</label>
 <input type="text" id="to" name="to">
+
+<div>
+  <span>number of days</span>
+  <span id='num_days'></span>
+</div>
+
+    <div>
+      <%= submit_tag "What Are Your Plans?" %>
+    </div>
  
- 
-</body>
-</html>
 
 <br>
+<% end %>
 
 
 <%= link_to "Home", "/persons" %>
-<%= link_to "What Are Your Plans", "/trip_situations" %>
