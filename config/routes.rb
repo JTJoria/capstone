@@ -28,6 +28,14 @@ root 'creators#index'
   patch '/situations/:id' => 'situations#update'
   delete '/situations/:id' => 'situations#destroy'
 
+  get '/trips' => 'trips#index' 
+  get '/trips/new' => 'trips#new'
+  post '/trips' => 'trips#create'
+  get '/trips/:id' => 'trips#show'
+  get '/trips/:id/edit' => 'trips#edit'
+  patch '/trips/:id' => 'trips#update'
+  delete '/trips/:id' => 'trips#destroy'
+
   get '/clothing_selections' => 'clothing_selections#index'
 
   get '/weathers' => 'weathers#index'

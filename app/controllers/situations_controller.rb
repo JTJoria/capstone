@@ -1,6 +1,27 @@
 class SituationsController < ApplicationController
 
   def index
+
+    @city = params[:city] || "Chicago"
+    @state = params[:state] || "IL"
+
+    weather = Unirest.get("http://api.wunderground.com/api/41904cbf33b185b4/forecast10day/q/#{@state}/#{@city}.json").body
+
+    @forecasts = weather["forecast"]["simpleforecast"]["forecastday"]
+    @days = []
+    @forecasts.each do |day|
+      dayHash = {}
+      dayHash[:month] = day["date"]["monthname"]
+      dayHash[:day] = day["date"]["day"]
+      dayHash[:year] = day["date"]["year"]
+      dayHash[:image] = day["icon_url"]
+      dayHash[:high] = day["high"]["fahrenheit"]
+      dayHash[:low] = day["low"]["fahrenheit"]
+      dayHash[:conditions] = day["conditions"]
+      @days << dayHash
+    end
+
+
     @persons = Person.all
 
 

@@ -4,19 +4,13 @@
 
 <div class="form-group">
   <%= label_tag :City %>
-  <%= text_field_tag :City %>
+  <%= text_field_tag :city %>
 </div>
 
 <div class="form-group">
   <%= label_tag :State %>
   <%= select_tag :state, options_for_select(us_states) %>
 </div>
-
-<div class="form-group">
-  <%= label_tag :zip_code %>
-  <%= text_field_tag :zip_code %>
-</div>
-
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -64,9 +58,9 @@
   <span id='num_days'></span>
 </div>
 
-    <div>
-      <%= submit_tag "What Are Your Plans?" %>
-    </div>
+  <%= submit_tag "What Are Your Plans?" %>
+
+
  
 
 <br>
@@ -74,3 +68,5 @@
 
 
 <%= link_to "Home", "/persons" %>
+
+
