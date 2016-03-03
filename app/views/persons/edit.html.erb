@@ -22,4 +22,6 @@
 
 <%= link_to "Home", "/persons" %>
 
+<%= link_to "Delete", "/persons/#{@person.id}", method: :delete, data:{confirm: "Are You Sure?"} %>
+
 <% end %>

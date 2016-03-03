@@ -4,7 +4,7 @@
 <% @persons.each do |person| %>
   <div class="col-md-4 col-sm-6 list-view">
       <div class = "thumbnail">
-        <h2><a href="/persons/<%= person.id %>/edit"><%= person.name %></a></h2>
+        <h2><a href="/persons/<%= person.id %>"><%= person.name %></a></h2>
         <h3>Gender: <%= person.gender %></h3>
         <h3>Age: <%= person.age %></h3>
       </div>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-devise_for :creators
+  devise_for :creators
 
 root 'creators#index'
 

@@ -5,9 +5,7 @@
 <h2>Location: <%= @city.titleize %>, <%= @state.upcase %></h2>
 
   <% @days.each do |day| %>
-  <h2>Date: <%= day[:month] %></h2>
-  <h2>Date: <%= day[:day] %></h2>
-  <h2>Date: <%= day[:year] %></h2>
+  <h2>Date: <%= day[:month] %> <%= day[:day] %>, <%= day[:year] %></h2>
   <h2>High: <%= day[:high]%> ˚ F</h2>
   <h2>Low: <%= day[:low]%> ˚ F</h2>
   <h2>Conditions: <%= day[:conditions]%> </h2>
