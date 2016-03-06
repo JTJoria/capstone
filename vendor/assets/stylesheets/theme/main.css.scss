@@ -160,15 +160,15 @@ a:hover {
 /*------------Colors------------------*/
 
 .black {
-  color: #31363a;
+  color: #0099ff;
 }
 
 .dark-gray {
-  color: #626c72;
+  color: #cccccc;
 }
 
 .gray {
-  color: #a5b2b9;
+  color: #66ccff;
 }
 
 .light-gray {
@@ -187,7 +187,7 @@ a:hover {
    Navigation styles
    ========================================================================== */
 .navbar-inverse {
-    background-color: #ff755a;
+    background-color: #0099ff;
     border-color: transparent;
 }
 
@@ -199,7 +199,7 @@ a:hover {
 }
 
 .nav > li > a {
-  color: #FFFFFF;
+  color: #0099ff;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -211,7 +211,7 @@ a:hover {
 }
 
 .navbar .nav > li > a {
-  color: #FFFFFF;
+  color: #0099ff;
   float: none;
   padding: 35px 16px;
   text-decoration: none;
@@ -360,17 +360,17 @@ a:hover {
 }
 
 .one {
-  background: url(../img/header1.jpg) no-repeat center center;
+  background-image: image-url("theme/header1.jpg") no-repeat center center !important;
   background-size: cover;
 }
 
 .two {
-  background: url(../img/header2.jpg) no-repeat center center;
+  background-image: image-url("theme/header2.jpg") no-repeat center center !important;
   background-size: cover;
 }
 
 .three {
-  background: url(../img/header3.jpg) no-repeat center center;
+  background-image: image-url("theme/header3.jpg") no-repeat center center !important;
   background-size: cover;
 }
 

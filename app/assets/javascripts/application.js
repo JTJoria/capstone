@@ -15,8 +15,6 @@
 //= require jquery_ujs
 //= require angular
 //= require app
-//= require theme/bootstrap.min
-//= require theme/jquery-1.11.2.min
 //= require theme/jquery.flexslider-min
 //= require theme/main
 //= require theme/modernizr-2.6.2-respond-1.1.0.min
