@@ -1,5 +1,11 @@
 <h1>Add a New Trip Mate!</h1>
 
+      <div id="errors">
+        <ul>
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
+      </div> 
+
 <%= form_tag "/persons", method: :post do %>
 
   <div>

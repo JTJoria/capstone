@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303010248) do
+ActiveRecord::Schema.define(version: 20160310011406) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160303010248) do
     t.integer  "age",        limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "creator_id", limit: 4
   end
 
   create_table "situation_categories", force: :cascade do |t|

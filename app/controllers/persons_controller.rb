@@ -1,7 +1,26 @@
 class PersonsController < ApplicationController
 
+  before_action :require_login
+ 
+  def require_login
+    unless creator_signed_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to "/"
+    end
+  end
+
   def index
-    @persons = Person.all
+
+    persons = Person.all
+    
+    @tripmates = []
+
+    persons.each do |person|
+      if current_creator.id == person.creator_id
+        @tripmates << person
+      end
+    end
+
   end
 
   def show
@@ -9,13 +28,20 @@ class PersonsController < ApplicationController
   end
 
   def create
-    @person = Person.new({name: params[:name], gender: params[:gender], age: params[:age]})
+
+    @person = Person.new({name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id})
 
     @person.save
+      
+      if @person.save
+        render :show
+      else
+        render json: { errors: @person.errors.full_messages }, status: 422
+      end
 
     flash[:success]= "Trip Mate Added"
 
-    redirect_to "/persons/#{@person.id}"
+    # redirect_to "/persons/#{@person.id}"
   end
 
   def new

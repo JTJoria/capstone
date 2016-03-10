@@ -1,6 +1,7 @@
 class Creator < ActiveRecord::Base
 
   has_many :trips
+  has_many :people
   has_many :persons, through: :trips
   has_many :locations, through: :trips
   # Include default devise modules. Others available are:

@@ -18,7 +18,7 @@
 
 
 
-<h1>What Special Plans Do You Have?</h1>
+<h3>What Special Plans Do You Have?</h3>
 
 
 
@@ -66,7 +66,7 @@
           <tr>
             <% @persons.each do |person| %>
 
-            <th><%= person.name %></th>
+            <td><%= person.name %></td>
             <td><%= check_box_tag(:nice_dinner, 1) %></td>
             <td><%= check_box_tag(:wedding, 2) %></td>
             <td><%= check_box_tag(:beach, 3) %></td>

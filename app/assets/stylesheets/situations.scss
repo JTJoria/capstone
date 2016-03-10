@@ -5,4 +5,8 @@
 td {
     text-align: center; /* center checkbox horizontally */
     vertical-align: middle; /* center checkbox vertically */
+    td:nth-child(even){background-color: #f2f2f2}
+}
+td:nth-child(even) {
+    background-color: #99e6ff;
 }
