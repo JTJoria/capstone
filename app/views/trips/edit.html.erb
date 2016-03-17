@@ -1,0 +1,59 @@
+<h1>Edit A Trip</h1>
+
+<%= form_for(@trip, url: "/trips/#{@trip.id}") do |p| %>
+
+  <div>
+    <%=p.label :city %>
+    <%=p.text_field :city %>
+  </div>
+
+   <div>
+    <%=p.label :state %>
+    <%=p.text_field :state %>
+  </div>
+
+
+<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    var start_date = null;
+    var end_date = null;
+    $( "#from" ).datepicker({
+      defaultDate: "+1d",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        start_date = new Date(selectedDate);
+        if (end_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
+      }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        end_date = new Date(selectedDate);
+        if (start_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
+      }
+    });
+  });
+  </script>
+
+ 
+<label for="from">From</label>
+<input type="text" id="from" name="from">
+<label for="to">to</label>
+<input type="text" id="to" name="to"> -->
+
+<%= submit_tag "Updated!" %>
+
+<% end %>

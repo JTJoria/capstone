@@ -1,0 +1,72 @@
+<h1>Don't use right now</h1>
+
+<h1>Where are you going?</h1>
+
+<%= form_tag("/persons/new", method: "get") do %>
+
+<div class="form-group">
+  <%= label_tag :City %>
+  <%= text_field_tag :city %>
+</div>
+
+<div class="form-group">
+  <%= label_tag :State %>
+  <%= select_tag :state, options_for_select(us_states) %>
+</div>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+  $(function() {
+    var start_date = null;
+    var end_date = null;
+    $( "#from" ).datepicker({
+      defaultDate: "+1d",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        start_date = new Date(selectedDate);
+        if (end_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
+      }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        end_date = new Date(selectedDate);
+        if (start_date){
+          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+        }
+      }
+    });
+  });
+  </script>
+
+ 
+<label for="from">From</label>
+<input type="text" id="from" name="from">
+<label for="to">to</label>
+<input type="text" id="to" name="to">
+
+<div>
+  <span>number of days</span>
+  <span id='num_days'></span>
+</div>
+
+  <%= submit_tag "Who's Going With You?" %>
+
+
+ 
+
+<br>
+<% end %>
+
+
+<%= link_to "Home", "/persons" %>

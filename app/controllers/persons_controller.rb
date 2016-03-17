@@ -29,17 +29,14 @@ class PersonsController < ApplicationController
 
   def create
 
-    @person = Person.new({name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id})
-
-    @person.save
+    @person = Person.new({trip_id: params[:trip_id], name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id}, email: params[:email])
       
       if @person.save
+        flash[:success]= "Trip Mate Added"
         render :show
       else
-        render json: { errors: @person.errors.full_messages }, status: 422
+        redirect_to persons_new_path, flash: {error:  @person.errors.full_messages }
       end
-
-    flash[:success]= "Trip Mate Added"
 
     # redirect_to "/persons/#{@person.id}"
   end
@@ -54,6 +51,11 @@ class PersonsController < ApplicationController
 
   def update
     @person = Person.find_by(id: params[:id])
+    if @person.update_attributes(person_params)
+      redirect_to "/persons/#{@person.id}"
+    else
+      render 'edit'
+    end     
   end
 
   def destroy
@@ -63,5 +65,8 @@ class PersonsController < ApplicationController
     redirect_to "/persons"
   end
 
+  def person_params
+    params.require(:person).permit(:name, :gender, :age)
+  end
 
 end

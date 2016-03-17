@@ -6,4 +6,8 @@ class Person < ActiveRecord::Base
 
   has_many :clothing_selections
 
+  validates :name, presence: true
+  validates :gender, presence: true
+  validates :age, presence: true
+
 end

@@ -1,8 +1,24 @@
 Rails.application.routes.draw do
+  
+  namespace :api do
+    namespace :v1 do
+      get '/persons' => 'persons#index'
+      post '/persons' => 'persons#create'
+    end
+  end
+
+
+  namespace :api do
+    namespace :v1 do
+      get '/clothing_selections' => 'clothing_selections#index'
+      post '/clothing_selections' => 'clothing_selections#create'
+    end
+  end
+
+root 'creators#index'
 
   devise_for :creators
 
-root 'creators#index'
 
   get '/persons' => 'persons#index' 
   get '/persons/new' => 'persons#new'
@@ -35,6 +51,12 @@ root 'creators#index'
   get '/trips/:id/edit' => 'trips#edit'
   patch '/trips/:id' => 'trips#update'
   delete '/trips/:id' => 'trips#destroy'
+
+  get '/trips/:trip_id/persons' => 'persons#index'
+  get '/trips/:trip_id/persons/new' => 'persons#new'
+  post '/trips/:trip_id/persons' => 'persons#create'
+  get '/trips/:trip_id/persons' => 'persons#show'
+
 
   get '/clothing_selections' => 'clothing_selections#index'
 

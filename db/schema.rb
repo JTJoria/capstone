@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310011406) do
+ActiveRecord::Schema.define(version: 20160316182955) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -26,11 +26,6 @@ ActiveRecord::Schema.define(version: 20160310011406) do
     t.integer  "situation_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "creator", force: :cascade do |t|
-    t.string "email",    limit: 255
-    t.string "password", limit: 255
   end
 
   create_table "creators", force: :cascade do |t|
@@ -51,6 +46,12 @@ ActiveRecord::Schema.define(version: 20160310011406) do
   add_index "creators", ["email"], name: "index_creators_on_email", unique: true, using: :btree
   add_index "creators", ["reset_password_token"], name: "index_creators_on_reset_password_token", unique: true, using: :btree
 
+  create_table "garment2s", force: :cascade do |t|
+    t.string   "garments",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "garment_categories", force: :cascade do |t|
     t.integer  "garment_id",  limit: 4
     t.integer  "category_id", limit: 4
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160310011406) do
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "packed",                 default: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -121,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160310011406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "creator_id", limit: 4
+    t.string   "email",      limit: 255
   end
 
   create_table "situation_categories", force: :cascade do |t|
@@ -148,6 +151,10 @@ ActiveRecord::Schema.define(version: 20160310011406) do
     t.integer  "creator_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city",       limit: 255
+    t.string   "state",      limit: 255
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "users", force: :cascade do |t|

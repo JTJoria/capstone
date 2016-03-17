@@ -1,3 +1,9 @@
 .application {
-  margin-top: 100px;
+  margin-top: 90px;
+ }
+
+ .clothing_selections{
+  -webkit-columns: 50px 3; /* Chrome, Safari, Opera */
+  -moz-columns: 50px 3; /* Firefox */
+  columns: 50px 3;
  }

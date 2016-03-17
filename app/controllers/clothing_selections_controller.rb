@@ -1,10 +1,53 @@
 class ClothingSelectionsController < ApplicationController
   def index
-    @persons = Person.all
+    persons = Person.all
+
+    @tripmates = []
+
+    persons.each do |person|
+      if current_creator.id == person.creator_id
+        @tripmates << person
+      end
+    end
+
+    if params[:from] != nil && params[:to] != nil
+      p params[:from]
+
+      @start = Date.strptime(params[:from], "%m/%d/%Y")
+      @end =  Date.strptime(params[:to], "%m/%d/%Y")
+      @length = (@end - @start).to_i + 1
+    end
+
+
+
+    @city = params[:city] || "Chicago"
+    @state = params[:state] || "IL"
+
+    
+
+    weather = Unirest.get("http://api.wunderground.com/api/41904cbf33b185b4/forecast10day/q/#{@state}/#{@city}.json").body
+
+    @forecasts = weather["forecast"]["simpleforecast"]["forecastday"]
+
+    @days = []
+    @forecasts.each do |day|
+      dayHash = {}
+      dayHash[:month] = day["date"]["monthname"]
+      dayHash[:day] = day["date"]["day"]
+      dayHash[:year] = day["date"]["year"]
+      dayHash[:image] = day["icon_url"]
+      dayHash[:high] = day["high"]["fahrenheit"]
+      dayHash[:low] = day["low"]["fahrenheit"]
+      dayHash[:conditions] = day["conditions"]
+      @days << dayHash
+    end
+
+
+
     @outfits  = []
     @essentials = []
 
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id] = []
         @essentials[p.id] = []
       end
@@ -12,7 +55,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:wedding] != nil
 
       @event = Situation.find (params[:wedding])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat  FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -20,7 +63,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:beach] != nil
 
       @event = Situation.find (params[:beach])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -28,7 +71,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:sight_seeing] != nil
 
       @event = Situation.find (params[:sight_seeing])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -36,7 +79,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:business_trip] != nil
 
       @event = Situation.find (params[:business_trip])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -44,7 +87,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:nice_dinner] != nil
 
       @event = Situation.find (params[:nice_dinner])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -52,7 +95,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:relax] != nil
 
       @event = Situation.find (params[:relax])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -61,7 +104,7 @@ class ClothingSelectionsController < ApplicationController
     if params[:hiking] != nil
 
       @event = Situation.find (params[:hiking])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
@@ -70,12 +113,12 @@ class ClothingSelectionsController < ApplicationController
     if params[:line_dancing] != nil
 
       @event = Situation.find (params[:line_dancing])
-      @persons.each do |p|
+      @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-      @persons.each do |p|
+      @tripmates.each do |p|
         if p.gender == 'Male'
           category = Category.where('name = \'necessities male\'')
         else

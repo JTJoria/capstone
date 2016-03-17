@@ -360,17 +360,17 @@ a:hover {
 }
 
 .one {
-  background-image: image-url("theme/header1.jpg") no-repeat center center !important;
+  background-image: image-url("theme/luggage.jpg");
   background-size: cover;
 }
 
 .two {
-  background-image: image-url("theme/header2.jpg") no-repeat center center !important;
+  background-image: image-url("theme/sign.jpg");
   background-size: cover;
 }
 
 .three {
-  background-image: image-url("theme/header3.jpg") no-repeat center center !important;
+  background-image: image-url("theme/passport.jpg");
   background-size: cover;
 }
 
@@ -809,7 +809,7 @@ select, input[type="text"], input[type="password"], input[type="datetime"], inpu
    Sign Up Page styles
    ========================================================================== */
 #signup {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: url(../img/testimonial-bg.jpg);
   background-size: cover;
   padding-top: 120px;
   padding-bottom: 120px;
@@ -960,7 +960,7 @@ ul.icons li {
    Testimonial styles
    ========================================================================== */
 #testimonial {
-  background: url(../img/testimonial-bg.jpg) no-repeat;
+  background: url(../img/testimonial-bg.jpg);
   background-size: cover;
 }
 

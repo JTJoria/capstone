@@ -1,26 +1,4 @@
-
-
-<h1>Forecast</h1>
-
-<h2>Location: <%= @city.titleize %>, <%= @state.upcase %></h2>
-
-<% @days.each do |day| %>
-<h2>Date: <%= day[:month] %> <%= day[:day] %>, <%= day[:year] %></h2>
-<h2>High: <%= day[:high]%> ˚ F</h2>
-<h2>Low: <%= day[:low]%> ˚ F</h2>
-<h2>Conditions: <%= day[:conditions]%> </h2>
-<%= image_tag day[:image] %>
-
-<% end %>
-
-<hr>
-
-
-
-
 <h3>What Special Plans Do You Have?</h3>
-
-
 
 
   <head>
@@ -34,7 +12,6 @@
       }
     </style>
   </head>
-
 
 
     <%= form_tag("/clothing_selections?event_id=3", method: "get") do %>
@@ -64,10 +41,10 @@
         <!-- </div> -->
 
           <tr>
-            <% @persons.each do |person| %>
+            <% @tripmates.each do |person| %>
 
             <td><%= person.name %></td>
-            <td><%= check_box_tag(:nice_dinner, 1) %></td>
+            <td><input type='checkbox' ng-model = 'nice_dinner, 1' ></td>
             <td><%= check_box_tag(:wedding, 2) %></td>
             <td><%= check_box_tag(:beach, 3) %></td>
             <td><%= check_box_tag(:business_trip, 4) %></td>
@@ -80,10 +57,12 @@
         <% end %>
       </table>
 
+      
       <div>
         <%= submit_tag "What Should I Pack" %>
       </div>
       <%= hidden_field_tag(:length, @length) %>
-  <% end %>
+
+    <% end %>
 
   <%= link_to "Home", "/persons" %>

@@ -1,3 +1,12 @@
-<h3>Create a new trip!</h3>
+<h1>Your Trips</h1>
 
-<h3>Modify an old trip</h3>
+<% @trips.each do |trip| %>
+  <h4><a href="/trips/<%= trip.id %>"><%= trip.city %></a></h4>
+  <h5> State: <%= trip.state %></h5>
+  <h5> Start Date: <%= trip.start_date %></h5>
+  <h5> End Date: <%= trip.end_date %></h5>
+  <br>
+<% end %>
+
+<h3><a href="/locations">Create a New Trip<span class="btn btn-default"></span></a></h3>
+
