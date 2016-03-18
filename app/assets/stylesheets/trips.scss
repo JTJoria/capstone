@@ -1,3 +1,14 @@
 // Place all the styles related to the trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#main-wrapper {
+    width:100%;
+}
+#left-side {
+    width:450px;
+    float:left;
+}
+#right-side {
+    margin-left:100px;
+        /* May have to increase depending on borders and margin of the fixd width div*/
+}

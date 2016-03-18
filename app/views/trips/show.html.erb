@@ -1,10 +1,22 @@
-<h2>Your Trips</h2>
+<div id="main-wrapper">
 
-  <h3> City: <%= @trip.city %></h3>
-  <h3> State: <%= @trip.state %></h3>
-  <h3> Start Date: <%= @trip.start_date %></h3>
-  <h3> End Date: <%= @trip.end_date %></h3>
+  <div id="left-side">
+    <h2>Your Trip</h2>
 
-<h3><a href="/trips/<%= @trip.id %>/persons/new">Add A Trip Mate<span class="btn btn-default"></span></a></h3>
-<h3><a href="/trips/<%= @trip.id %>/edit">Edit Trip<span class="btn btn-default"></span></a></h3>
+      <h3> City: <%= @trip.city %></h3>
+      <h3> State: <%= @trip.state %></h3>
+      <h3> Start Date: <%= @trip.start_date %></h3>
+      <h3> End Date: <%= @trip.end_date %></h3>
 
+    <h3><a href="/trips/<%= @trip.id %>/persons/new">Add A Trip Mate<span class="btn btn-default"></span></a></h3>
+    <h3><a href="/trips/<%= @trip.id %>/edit">Edit Trip<span class="btn btn-default"></span></a></h3>
+    <%= link_to "Delete", "/trips/#{@trip.id}", method: :delete, data:{confirm: "Are You Sure?"} %>
+  </div>
+
+  <div id="right-side">
+    <h2>Your Trip Mates</h2>
+
+     <h3><a href="/situations">What Are Your Plans?<span class="btn btn-default"></span></a></h3>
+
+  </div>
+</div>

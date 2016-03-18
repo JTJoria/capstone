@@ -1,7 +1,24 @@
 class TripsController < ApplicationController
 
+  before_action :require_login
+ 
+  def require_login
+    unless creator_signed_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to "/"
+    end
+  end
+
   def index
-    @trips = Trip.all
+    trips = Trip.all
+
+    @this_trip = []
+
+    trips.each do |trip|
+      if current_creator.id == trip.creator_id
+        @this_trip << trip
+      end
+    end
   end
 
   def show
@@ -29,6 +46,13 @@ class TripsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @trip = Trip.find_by(id: params[:id])
+    @trip.destroy
+
+    redirect_to "/trips"
   end
 
 

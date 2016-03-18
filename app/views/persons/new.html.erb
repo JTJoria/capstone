@@ -5,6 +5,8 @@
 
   <%= form_tag "/persons", method: :post do %>
 
+    <%= hidden_field_tag params[:trip_id] %>
+
     <div>
       <%=label_tag :name %>
       <%= text_field_tag :name %>

@@ -1,8 +1,7 @@
 <h1>All Your Trip Mates: </h1>
 <!-- <h2>You have {{ people.length}} people joining you -->
 
-
-<% if creator_signed_in? && @tripmates != 0 %>
+<% if creator_signed_in? %>
 
   <div class = "row">
   <% @tripmates.each do |person| %>
@@ -18,7 +17,7 @@
 
 <% else %>
 
-  <h3>No trip mates so far! Try adding one below!</h3>
+  <h3><%= No trip mates so far! Try adding one below! %></h3>
 
 <% end %>
         

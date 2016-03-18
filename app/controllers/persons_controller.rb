@@ -28,8 +28,8 @@ class PersonsController < ApplicationController
   end
 
   def create
-
-    @person = Person.new({trip_id: params[:trip_id], name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id}, email: params[:email])
+    # current_trip = trip.find_by(id: params[:id])
+    @person = Person.new({trip_id: current_trip.id, name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id, email: params[:email]})
       
       if @person.save
         flash[:success]= "Trip Mate Added"
@@ -42,6 +42,7 @@ class PersonsController < ApplicationController
   end
 
   def new
+    params[:trip_id]
     @person = Person.new
   end
 
@@ -68,5 +69,9 @@ class PersonsController < ApplicationController
   def person_params
     params.require(:person).permit(:name, :gender, :age)
   end
+
+  # def current_trip
+  #   @trip = trip.find_by(id: params[:id])
+  # end
 
 end
