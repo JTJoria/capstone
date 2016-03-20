@@ -1,31 +1,16 @@
 class TripSituationsController < ApplicationController
 
   def index
-    @persons = Person.all
-  end
-
-  def show
 
   end
 
   def create
 
-  end
+    @this_trip = ThisTrip.new({situation_id: params[:situation_id], trip_id: params[:trip_id]})
 
-  def new
-
-  end
-
-  def edit
+    @this_trip.save
 
   end
 
-  def update
-
-  end
-
-  def destroy
-
-  end
 
 end

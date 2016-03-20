@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316182955) do
+ActiveRecord::Schema.define(version: 20160320160430) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -141,10 +141,10 @@ ActiveRecord::Schema.define(version: 20160316182955) do
   end
 
   create_table "trip_situations", force: :cascade do |t|
-    t.integer  "location_id",  limit: 4
     t.integer  "situation_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "trip_id",      limit: 4
   end
 
   create_table "trips", force: :cascade do |t|

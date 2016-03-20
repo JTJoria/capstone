@@ -1,52 +1,49 @@
 <div ng-app="app">
-  {{ 1 + 1 }}
   <div ng-controller="packCtrl" ng-init="setup()">
+    <h1>Forecast</h1>
+<div class="container">
+  <div id='sidebar'>
+      
+      <h3>Location: <%= @city.titleize %>, <%= @state.upcase %></h3>
+        
+        <% @days.each do |day| %>
+          <div>Date: <%= day[:month] %> <%= day[:day] %>, <%= day[:year] %></div>
+          <div>High: <%= day[:high]%> ˚ F</div>
+          <div>Low: <%= day[:low]%> ˚ F</div>
+          <div>Conditions: <%= day[:conditions]%> </div>
+          <%= image_tag day[:image] %>
+          <hr>
+        <% end %>
+  </div>
 
-<h1>Forecast</h1>
-  
-  <h2>Location: <%= @city.titleize %>, <%= @state.upcase %></h2>
-    
-    <% @days.each do |day| %>
-      <h2>Date: <%= day[:month] %> <%= day[:day] %>, <%= day[:year] %></h2>
-      <h2>High: <%= day[:high]%> ˚ F</h2>
-      <h2>Low: <%= day[:low]%> ˚ F</h2>
-      <h2>Conditions: <%= day[:conditions]%> </h2>
-      <%= image_tag day[:image] %>
-      <hr>
-    <% end %>
 
-
-
-    <h1>What You Should Pack</h1>
-      <div id="errors">
-        <ul>
-        <li ng-repeat="error in errors">{{ error }}</li>
-        </ul>
-      </div>
-    <div class = "row">
-      <% @tripmates.each do |person| %>
-        <div class="col-md-4 col-sm-6 list-view">
-          <div class = "thumbnail">
-            <h2><%= person.name %></h2>
-
-            <h3>Essentials</h3>
-              <ul>
-                <li ng-repeat="garment in personalClothingSeletion" ng-class="{ strike: garment.packed }" ng-click="togglePack(garment)">{{garment.name}}</li>
-              </ul>
+  <div id="content">
+        <h1>What You Should Pack</h1>
+          <div id="errors">
             <ul>
-              <% @outfits[person.id].each do |outfit|%>
-                <h3><%= outfit.name %></h3>
-                <% outfit.garments.each do |garment| %>
-                  <li><%= garment.name %> </li>
-                <% end %>
-              <% end %>
+            <li ng-repeat="error in errors">{{ error }}</li>
             </ul>
           </div>
+        <div class = "row">
+          <% @tripmates.each do |person| %>
+            <div class="col-md-4 col-sm-6 list-view">
+              <div class = "thumbnail">
+                <h2><%= person.name %></h2>
+                   <% @outfits[person.id].each do |outfit|%>
+                    <span  ng-init="addOutfit(<%= outfit.to_json%>, <%= outfit.garments.to_json%>, <%= person.id %>)"></span>
+                    <% end %>
+                    <span  ng-init="addEssentials( <%= @essentials[person.id].to_json %>, <%= person.id %>)"></span>
+                    <div ng-repeat="outfit in personalClothingSelection (<%= person.id %>)">
+                    <h3 >{{outfit.name}}</h3>
+                    <ul  >
+                      <li ng-repeat="garment in outfit.garments" ng-class="{ strike: garment.packed }" ng-click="togglePack(garment)">{{garment.name}}</li>
+                    </ul>
+                    </div>
+              </div>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+    <!-- </div> -->
     </div>
   </div>
-<!-- </div> -->
-</div>
-
-<%= link_to "Home", "/persons" %>

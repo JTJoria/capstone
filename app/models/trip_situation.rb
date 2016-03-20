@@ -1,7 +1,7 @@
 class TripSituation < ActiveRecord::Base
 
-  belongs_to :location
-
   belongs_to :situation
+  belongs_to :trip
+
 
 end

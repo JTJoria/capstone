@@ -4,10 +4,8 @@
 <h3>Gender: <%= @person.gender %></h3>
 <h3>Age: <%= @person.age %></h3>
 <h3>Email: <%= @person.email %></h3>
-
-<a href="/persons/new">Add Another Trip Mate <span class="btn btn-default"></span></a>
-<a href="/situations">That's Everybody <span class="btn btn-default"></span></a>
-<hr>
-<%= link_to "Home", "/persons" %>
 <%= link_to "Edit", "/persons/#{@person.id}/edit" %>
 <%= link_to "Delete", "/persons/#{@person.id}", method: :delete, data:{confirm: "Are You Sure?"} %>
+
+<hr>
+<h3><a href="/trips/">Back To Your Trip</a></h3>

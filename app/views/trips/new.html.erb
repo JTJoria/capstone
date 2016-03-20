@@ -1,8 +1,6 @@
-<h1>Don't use right now</h1>
-
 <h1>Where are you going?</h1>
 
-<%= form_tag("/persons/new", method: "get") do %>
+<%= form_tag("/locations", method: "create") do %>
 
 <div class="form-group">
   <%= label_tag :City %>
@@ -60,7 +58,7 @@
   <span id='num_days'></span>
 </div>
 
-  <%= submit_tag "Who's Going With You?" %>
+  <%= submit_tag "View Your Trip" %>
 
 
  

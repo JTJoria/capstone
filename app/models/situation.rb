@@ -5,4 +5,6 @@ class Situation < ActiveRecord::Base
 
   has_many :trip_situations
 
+
+
 end

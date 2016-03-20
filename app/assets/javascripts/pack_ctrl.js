@@ -2,7 +2,7 @@
   "use strict";
 
   angular.module("app").controller("packCtrl", function($scope, $http){
-
+    $scope.personalClothing = [];
     $scope.setup = function(){
       $http.get('api/v1/clothing_selections.json').then(function(response){
         $scope.clothing_selections = response.data;
@@ -13,9 +13,30 @@
       garment.packed = !garment.packed
     };
 
-    $scope.personalClothingSelection = function(){
-      
+    $scope.personalClothingSelection = function(person){
+
+      return $scope.personalClothing[person];
     };
+
+    $scope.addEssentials = function( essentials, person){
+
+      if(!scope.personalClothing[person]){
+        $scope.personalClothing[person] = [];
+      }
+      var outfit = {
+          name: 'Essentials',
+        garments: essentials
+      };
+      $scope.personalClothing[person].push(outfit);
+    }
+
+    $scope.addOutfit = function(outfit, garments, person){
+      if(!scope.personalClothing[person]){
+        $scope.personalClothing[person] = [];
+      }
+      outfit.garments = garments;
+      $scope.personalClothing[person].push(outfit);
+    }
 
     $scope.addNewPerson = function(newName, newGender, newAge){
       var newPerson = {

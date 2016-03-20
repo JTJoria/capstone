@@ -25,20 +25,20 @@ class PersonsController < ApplicationController
 
   def show
     @person = Person.find_by(id: params[:id])
+
   end
 
   def create
     # current_trip = trip.find_by(id: params[:id])
-    @person = Person.new({trip_id: current_trip.id, name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id, email: params[:email]})
+    @person = Person.new({trip_id: params[:trip_id], name: params[:name], gender: params[:gender], age: params[:age], creator_id: current_creator.id, email: params[:email]})
       
       if @person.save
         flash[:success]= "Trip Mate Added"
-        render :show
+        redirect_to "/trips/#{params[:trip_id]}"
       else
         redirect_to persons_new_path, flash: {error:  @person.errors.full_messages }
       end
 
-    # redirect_to "/persons/#{@person.id}"
   end
 
   def new

@@ -3,25 +3,27 @@ class ClothingSelectionsController < ApplicationController
     persons = Person.all
 
     @tripmates = []
+    this_trip = current_creator.trips.last
+    this_trip_id = current_creator.trips.last.id
 
     persons.each do |person|
-      if current_creator.id == person.creator_id
+      if this_trip_id == person.trip_id
         @tripmates << person
       end
     end
 
-    if params[:from] != nil && params[:to] != nil
-      p params[:from]
+    if this_trip.start_date != nil && this_trip.end_date != nil
+      p this_trip.end_date
 
-      @start = Date.strptime(params[:from], "%m/%d/%Y")
-      @end =  Date.strptime(params[:to], "%m/%d/%Y")
-      @length = (@end - @start).to_i + 1
+      @start = this_trip.start_date.strftime("%m/%d/%Y")
+      @end =  this_trip.end_date.strftime("%m/%d/%Y")
+      @length = (this_trip.end_date - this_trip.start_date).to_i
     end
 
 
 
-    @city = params[:city] || "Chicago"
-    @state = params[:state] || "IL"
+    @city = this_trip.city || "Chicago"
+    @state = this_trip.state || "IL"
 
     
 
@@ -52,86 +54,77 @@ class ClothingSelectionsController < ApplicationController
         @essentials[p.id] = []
       end
 
-    if params[:wedding] != nil
-
-      @event = Situation.find (params[:wedding])
+    if this_trip.situations.name == "wedding"
+        
       @tripmates.each do |p|
         @outfits[p.id].concat  FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    if params[:beach] != nil
+    if this_trip.situations.name == "beach"
 
-      @event = Situation.find (params[:beach])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    if params[:sight_seeing] != nil
+    if this_trip.situations.name == "sight_seeing"
 
-      @event = Situation.find (params[:sight_seeing])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    if params[:business_trip] != nil
+    if this_trip.situations.name == "business_trip"
 
-      @event = Situation.find (params[:business_trip])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    if params[:nice_dinner] != nil
+    if this_trip.situations.name == "nice_dinner"
 
-      @event = Situation.find (params[:nice_dinner])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
-    if params[:relax] != nil
+    if this_trip.situations.name == "relax"
 
-      @event = Situation.find (params[:relax])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
 
-    if params[:hiking] != nil
+    if this_trip.situations.name == "hiking"
 
-      @event = Situation.find (params[:hiking])
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
 
-    if params[:line_dancing] != nil
-
-      @event = Situation.find (params[:line_dancing])
+    if this_trip.situations.name == "line_dancing"
       @tripmates.each do |p|
         @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
     end
 
       @tripmates.each do |p|
-        if p.gender == 'Male'
+        if p.gender.downcase == 'male'
           category = Category.where('name = \'necessities male\'')
         else
           category = Category.where('name = \'necessities female\'')
         end
 
         garment_ids = GarmentCategory.where('category_id = ?', category[0].id)
-
         garment_ids.each do |garment|
           garment = Garment.find(garment.garment_id)
           @essentials[p.id] << garment
         end
-      
+
+
       end
 
   end

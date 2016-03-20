@@ -57,6 +57,13 @@ root 'creators#index'
   post '/trips/:trip_id/persons' => 'persons#create'
   get '/trips/:trip_id/persons' => 'persons#show'
 
+  get '/trips/:trip_id/situations' => 'situations#index'
+  get '/trips/:trip_id/situations/new' => 'situations#new'
+  post '/trips/:trip_id/situations' => 'situations#create'
+  get '/trips/:trip_id/situations' => 'situations#show'
+
+
+
 
   get '/clothing_selections' => 'clothing_selections#index'
 

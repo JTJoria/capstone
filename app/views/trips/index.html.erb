@@ -4,9 +4,8 @@
 
   <% @this_trip.each do |trip| %>
     <h4><a href="/trips/<%= trip.id %>"><%= trip.city %></a></h4>
-    <h5> State: <%= trip.state %></h5>
-    <h5> Start Date: <%= trip.start_date %></h5>
-    <h5> End Date: <%= trip.end_date %></h5>
+    <h5> Start Date: <%= trip.start_date.strftime("%B %e, %Y") %></h5>
+    <h5> End Date: <%= trip.end_date.strftime("%B %e, %Y") %></h5>
     <br>
   <% end %>
 
@@ -15,6 +14,3 @@
 <h3><%= No trips so far! Try adding one below! %></h3>
 
 <% end %>
-
-<h3><a href="/locations">Create a New Trip<span class="btn btn-default"></span></a></h3>
-

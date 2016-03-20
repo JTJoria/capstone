@@ -22,36 +22,21 @@
           </button>
           <a class="navbar-brand img-responsive" href="/"><%= image_tag('theme/logo.png') %></a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="/">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Your Trip <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/locations">Locations</a></li>
-                  <li><a href="/persons">Your Trip Mates</a></li>
-                  <li><a href="/persons/new">Add Someone New</a></li>
-                  <li><a href="/trips">Your Trips</a></li>
-                  <li><a href="/trips/new">Add A New Trip</a></li>
-<!--                   <li><a href="blog.html">Blog Loop</a></li>
-                  <li><a href="blog-article.html">Blog Article</a></li>
-                  <li><a href="login.html">Log In</a></li>
-                  <li><a href="signup.html">Sign Up</a></li>
-                  <li><a href="icons.html">Icons</a></li> -->
-                </ul>
-              </li>
-            <li><a href="contact.php">Contact</a></li>
-          </ul>
+
            <ul class="nav navbar-nav navbar-right">
               <% if creator_signed_in? %>
                 <li> signed in: <%= current_creator.email %></li>
+                  <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="/">Home</a></li>
+                  <li class="active"><a href="/trips">Your Trips</a></li>
+                  <li class="active"><a href="/trips/new">Add A New Trip</a></li>
+          </ul>
               <% else %>
                 <li><a href="/creators/sign_in">Sign In!</a></li>
                 <li><a href="/creators/sign_up">Sign Up!</a></li> 
               <% end %>
               <li><%= link_to "Sign Out", "/creators/sign_out", method: :delete if creator_signed_in? %></li>
           </ul>
-        </div><!--/.navbar-collapse -->
       </div>
     </div>
 
