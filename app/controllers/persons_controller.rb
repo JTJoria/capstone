@@ -52,6 +52,7 @@ class PersonsController < ApplicationController
 
   def update
     @person = Person.find_by(id: params[:id])
+    p person_params
     if @person.update_attributes(person_params)
       redirect_to "/persons/#{@person.id}"
     else
@@ -63,11 +64,11 @@ class PersonsController < ApplicationController
     @person = Person.find_by(id: params[:id])
     @person.destroy
 
-    redirect_to "/persons"
+    redirect_to "/trips"
   end
 
   def person_params
-    params.require(:person).permit(:name, :gender, :age)
+    params.require(:person).permit(:name, :gender, :age, :email)
   end
 
   # def current_trip

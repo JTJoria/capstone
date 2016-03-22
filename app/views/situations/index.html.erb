@@ -1,7 +1,9 @@
+<div ng-app="app">
+  <div ng-controller="situationsCtrl" ng-init="setup(<%= @tripstuff.to_json %>)">
+
 <h3>What Special Plans Do You Have?</h3>
 
 
-  <head>
     <style>
       table, th, td {
         border: 1px solid black;
@@ -11,10 +13,9 @@
         padding: 5px;
       }
     </style>
-  </head>
 
 
-    <%= form_tag("/clothing_selections?event_id=3", method: "get") do %>
+    <%= form_tag("/trips/#{@this_trip_id}/clothing_selections", method: "get") do %>
 
       <table >
           <tr>
@@ -43,14 +44,14 @@
             <% @tripmates.each do |person| %>
 
             <td><%= person.name %></td>
-            <td><input type='checkbox' ng-model = 'nice_dinner, 1' ></td>
-            <td><%= check_box_tag(:wedding, 2) %></td>
-            <td><%= check_box_tag(:beach, 3) %></td>
-            <td><%= check_box_tag(:business_trip, 4) %></td>
-            <td><%= check_box_tag(:sight_seeing, 5) %></td>
-            <td><%= check_box_tag(:relax, 6) %></td>
-            <td><%= check_box_tag(:hiking, 7) %></td>
-            <td><%= check_box_tag(:line_dancing, 8) %></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 1, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 1)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 2, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 2)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 3, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 3)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 4, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 4)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 5, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 5)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 6, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 6)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 7, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 7)"></td>
+            <td><input type='checkbox' ng-click="addSituation(<%= person.id %>, 8, <%= @this_trip_id %>)" ng-checked="isChecked(<%= person.id %>, 8)"></td>
           </tr>
           <br>
         <% end %>
@@ -65,3 +66,6 @@
     <% end %>
 
   <%= link_to "Home", "/persons" %>
+
+  </div>
+</div>

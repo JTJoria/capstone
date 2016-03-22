@@ -1,19 +1,19 @@
 <h1>Edit A Trip</h1>
 
-<%= form_for(@trip, url: "/trips/#{@trip.id}") do |p| %>
+<%= form_tag("/trips/#{@trip.id}", method: :patch) do %>
 
-  <div>
-    <%=p.label :city %>
-    <%=p.text_field :city %>
+  <div class="form-group">
+    <%=label_tag :City %>
+    <%=text_field_tag :city %>
   </div>
 
-   <div>
-    <%=p.label :state %>
-    <%=p.text_field :state %>
+   <div class="form-group">
+    <%=label_tag :State %>
+    <%=select_tag :state, options_for_select(us_states) %>
   </div>
 
 
-<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
@@ -50,10 +50,10 @@
 
  
 <label for="from">From</label>
-<input type="text" id="from" name="from">
+<input type="text" id="from" name="start_date">
 <label for="to">to</label>
-<input type="text" id="to" name="to"> -->
+<input type="text" id="to" name="end_date">
 
-<%= submit_tag "Updated!" %>
+<%= submit_tag "Update It!" %>
 
 <% end %>

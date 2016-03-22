@@ -23,6 +23,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find_by(id: params[:id])
+    p @trip
   end
 
   def create
@@ -45,12 +46,19 @@ class TripsController < ApplicationController
 
   def edit
     @trip = Trip.find_by(id: params[:id])
+
+    if params[:from] != nil && params[:to] != nil
+      p params[:from]
+
+      @start = Date.strptime(params[:from], "%m/%d/%Y")
+      @end =  Date.strptime(params[:to], "%m/%d/%Y")
+    end
   end
 
   def update
     @trip = Trip.find_by(id: params[:id])
-    if @trip.update_attributes(trip_params)
-      redirect_to "/trip/#{@trip.id}"
+    if @trip.update(city: params[:city], state: params[:state], start_date: Date.strptime(params[:start_date], '%m/%d/%Y'), end_date: Date.strptime(params[:end_date], '%m/%d/%Y'))
+      redirect_to "/trips/#{@trip.id}"
     else
       render 'edit'
     end

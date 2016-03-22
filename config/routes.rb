@@ -62,11 +62,9 @@ root 'creators#index'
   post '/trips/:trip_id/situations' => 'situations#create'
   get '/trips/:trip_id/situations' => 'situations#show'
 
+  post '/trips/:trip_id/situations/addsituation' => 'situations#add_situation'
+  delete '/trips/:trip_id/situations/removesituation' => 'situations#remove_situation'
 
-
-
-  get '/clothing_selections' => 'clothing_selections#index'
-
-  get '/weathers' => 'weathers#index'
+  get '/trips/:trip_id/clothing_selections' => 'clothing_selections#index'
 
 end

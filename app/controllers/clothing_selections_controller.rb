@@ -3,8 +3,10 @@ class ClothingSelectionsController < ApplicationController
     persons = Person.all
 
     @tripmates = []
-    this_trip = current_creator.trips.last
-    this_trip_id = current_creator.trips.last.id
+    this_trip = Trip.find_by(id: params[:trip_id])
+    this_trip_id = params[:trip_id].to_i
+
+    @tripstuff = TripSituation.where(trip_id: this_trip_id)
 
     persons.each do |person|
       if this_trip_id == person.trip_id
@@ -54,62 +56,91 @@ class ClothingSelectionsController < ApplicationController
         @essentials[p.id] = []
       end
 
-    if this_trip.situations.name == "wedding"
-        
-      @tripmates.each do |p|
-        @outfits[p.id].concat  FindOutfitsByCategories(@event.categories, p.gender)
+  @tripmates.each do |person|  
+
+      if CheckSituation(person.id, 2)
+
+        @event = SituationCategory.where(situation_id: 2)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat  FindOutfitsByCategories(categories, person.gender)
       end
-    end
 
-    if this_trip.situations.name == "beach"
-
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      if CheckSituation(person.id, 3)
+        @event = SituationCategory.where(situation_id: 3)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+    
       end
-    end
 
-    if this_trip.situations.name == "sight_seeing"
+      if CheckSituation(person.id, 5)
+        @event = SituationCategory.where(situation_id: 5)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
 
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
-    end
 
-    if this_trip.situations.name == "business_trip"
+      if CheckSituation(person.id, 4)
+        @event = SituationCategory.where(situation_id: 4)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
 
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
-    end
 
-    if this_trip.situations.name == "nice_dinner"
+      if CheckSituation(person.id, 1)
+        @event = SituationCategory.where(situation_id: 1)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
 
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
-    end
 
-    if this_trip.situations.name == "relax"
+      if CheckSituation(person.id, 6)
+        @event = SituationCategory.where(situation_id: 6)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
 
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
-    end
 
 
-    if this_trip.situations.name == "hiking"
+      if CheckSituation(person.id, 7)
+        @event = SituationCategory.where(situation_id: 7)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
 
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
       end
-    end
 
 
-    if this_trip.situations.name == "line_dancing"
-      @tripmates.each do |p|
-        @outfits[p.id].concat FindOutfitsByCategories(@event.categories, p.gender)
+      if CheckSituation(person.id, 8)
+        @event = SituationCategory.where(situation_id: 8)
+        categories = []
+        @event.each do |e|
+          categories << e
+        end
+        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+
       end
-    end
+
+  end
 
       @tripmates.each do |p|
         if p.gender.downcase == 'male'
@@ -133,7 +164,7 @@ class ClothingSelectionsController < ApplicationController
 
     category_id = []
     category.each do |c|
-      category_id << c.id
+      category_id << c.category_id
     end
 
     outfit_ids = OutfitCategory.where('category_id IN (?)', category_id).group(:outfit_id).order('count(*) DESC').limit(2)
@@ -150,6 +181,19 @@ class ClothingSelectionsController < ApplicationController
         outfits << outfit
       end
     end
+
     return outfits
+  end
+
+  def CheckSituation(person_id, situation_id)
+    @tripstuff.each do |situation|
+
+      if situation.people_id == person_id &&
+          situation.situation_id == situation_id
+         return true 
+      end
+
+    end
+    return false
   end
 end
