@@ -1,59 +1,62 @@
-<h1>Edit A Trip</h1>
+<div id="centered">
+  <h1>Edit A Trip</h1>
 
-<%= form_tag("/trips/#{@trip.id}", method: :patch) do %>
+  <%= form_tag("/trips/#{@trip.id}", method: :patch) do %>
 
-  <div class="form-group">
-    <%=label_tag :City %>
-    <%=text_field_tag :city %>
-  </div>
+    <div class="form-group">
+      <%=label_tag :City %>
+      <%=text_field_tag :city %>
+    </div>
 
-   <div class="form-group">
-    <%=label_tag :State %>
-    <%=select_tag :state, options_for_select(us_states) %>
-  </div>
+     <div class="form-group">
+      <%=label_tag :State %>
+      <%=select_tag :state, options_for_select(us_states) %>
+    </div>
 
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    var start_date = null;
-    var end_date = null;
-    $( "#from" ).datepicker({
-      defaultDate: "+1d",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-        start_date = new Date(selectedDate);
-        if (end_date){
-          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+    $(function() {
+      var start_date = null;
+      var end_date = null;
+      $( "#from" ).datepicker({
+        defaultDate: "+1d",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function( selectedDate ) {
+          $( "#to" ).datepicker( "option", "minDate", selectedDate );
+          start_date = new Date(selectedDate);
+          if (end_date){
+            $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+          }
         }
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-        end_date = new Date(selectedDate);
-        if (start_date){
-          $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+      });
+      $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3,
+        onClose: function( selectedDate ) {
+          $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+          end_date = new Date(selectedDate);
+          if (start_date){
+            $("#num_days").text((end_date - start_date)/(1000*60*60*24));
+          }
         }
-      }
+      });
     });
-  });
-  </script>
+    </script>
 
- 
-<label for="from">From</label>
-<input type="text" id="from" name="start_date">
-<label for="to">to</label>
-<input type="text" id="to" name="end_date">
+   
+  <label for="from">From</label>
+  <input type="text" id="from" name="start_date">
+  <label for="to">to</label>
+  <input type="text" id="to" name="end_date">
 
-<%= submit_tag "Update It!" %>
+  <%= submit_tag "Update It!" %>
 
-<% end %>
+  <% end %>
+
+</div>  

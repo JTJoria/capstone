@@ -7,3 +7,15 @@
   -moz-columns: 50px 3; /* Firefox */
   columns: 50px 3;
  }
+
+
+ .navbar-inverse {
+    background-color: #0A6AD0;
+    border-color: transparent;
+}
+
+.nav-collapse, .nav-collapse.collapse {
+    background: none repeat scroll 0 0 #ff755a;
+    height: 90px;
+    overflow: hidden;
+}

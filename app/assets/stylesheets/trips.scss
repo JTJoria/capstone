@@ -9,6 +9,17 @@
     float:left;
 }
 #right-side {
-    margin-left:100px;
-        /* May have to increase depending on borders and margin of the fixd width div*/
+    margin-left:400px;
+}
+body{
+  background-color: #cce6ff;
+}
+#centered{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+#margin{
+  padding-right: 40px;
+  padding-left: 50px;
 }
