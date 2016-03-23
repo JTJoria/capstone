@@ -12,21 +12,21 @@
     
     <h3><a href="/trips/<%= @trip.id %>/edit">Edit Trip</a></h3>
     <h3><%= link_to "Delete", "/trips/#{@trip.id}", method: :delete, data:{confirm: "Are You Sure?"} %></h3>
+     <h3><a href="/trips/<%= @trip.id %>/situations">What Are Your Plans?</a></h3>
   </div>
 
   <div id="right-side">
     <h2>Going With You</h2>
 
       <% @trip.persons.each do |person| %>
-        <h4><a href="/persons/<%= person.id %>"><%= person.name %></h4>
-        <br>
+        <h4><a href="/trips/<%= @trip.id %>/persons/<%= person.id %>"><%= person.name %></h4>
+<!--         <br> -->
       <%end%>
 
       <h3><a href="/trips/<%= @trip.id %>/persons/new">Add A Trip Mate
     </a></h3>
   </div>
 
-     <h3><a href="/trips/<%= @trip.id %>/situations">What Are Your Plans?</a></h3>
 
      </div>
 

@@ -25,6 +25,7 @@ class PersonsController < ApplicationController
 
   def show
     @person = Person.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:trip_id])
 
   end
 
@@ -48,13 +49,13 @@ class PersonsController < ApplicationController
 
   def edit
     @person = Person.find_by(id: params[:id])
+    @trip = Trip.find_by(id: params[:trip_id])
   end
 
   def update
     @person = Person.find_by(id: params[:id])
-    p person_params
     if @person.update_attributes(person_params)
-      redirect_to "/persons/#{@person.id}"
+      redirect_to "/trips/#{params[:trip_id]}"
     else
       render 'edit'
     end     

@@ -23,13 +23,14 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find_by(id: params[:id])
-    p @trip
+    
   end
 
   def create
     @trip = Trip.new({creator_id: current_creator.id, city: params[:city], state: params[:state], start_date: params[:from], end_date: params[:to]})
 
     @trip.save
+
   end
 
   def new

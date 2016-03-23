@@ -4,8 +4,8 @@
 <h3>Gender: <%= @person.gender %></h3>
 <h3>Age: <%= @person.age %></h3>
 <h3>Email: <%= @person.email %></h3>
-<%= link_to "Edit", "/persons/#{@person.id}/edit" %>
+<%= link_to "Edit", "/trips/#{@trip.id}/persons/#{@person.id}/edit" %>
 <%= link_to "Delete", "/persons/#{@person.id}", method: :delete, data:{confirm: "Are You Sure?"} %>
 
 <hr>
-<h3><a href="/trips/">Back To Your Trip</a></h3>
+<h3><a href="/trips/<%= @trip.id %>">Back To Your Trip</a></h3>

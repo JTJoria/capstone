@@ -43,7 +43,27 @@ class ClothingSelectionsController < ApplicationController
       dayHash[:high] = day["high"]["fahrenheit"]
       dayHash[:low] = day["low"]["fahrenheit"]
       dayHash[:conditions] = day["conditions"]
-      @days << dayHash
+
+      wDay = Date.strptime(day["date"]["month"].to_s+'/'+dayHash[:day].to_s+'/'+dayHash[:year].to_s, "%m/%d/%Y")
+      if wDay >= this_trip.start_date && wDay <= this_trip.end_date
+        @days << dayHash
+      end
+    end
+
+    if @days.length ==0
+
+      @forecasts.each do |day|
+      dayHash = {}
+      dayHash[:month] = day["date"]["monthname"]
+      dayHash[:day] = day["date"]["day"]
+      dayHash[:year] = day["date"]["year"]
+      dayHash[:image] = day["icon_url"]
+      dayHash[:high] = day["high"]["fahrenheit"]
+      dayHash[:low] = day["low"]["fahrenheit"]
+      dayHash[:conditions] = day["conditions"]
+
+        @days << dayHash
+    end
     end
 
 
@@ -65,7 +85,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat  FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
       end
 
       if CheckSituation(person.id, 3)
@@ -74,7 +99,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
     
       end
 
@@ -84,7 +114,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -94,7 +129,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -104,7 +144,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -114,7 +159,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -125,7 +175,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -136,7 +191,12 @@ class ClothingSelectionsController < ApplicationController
         @event.each do |e|
           categories << e
         end
-        @outfits[person.id].concat FindOutfitsByCategories(categories, person.gender)
+        outfits = FindOutfitsByCategories(categories, person.gender)
+        outfits.each do |outfit|
+          if !AlreadyHasOutfit(person.id, outfit.id)
+            @outfits[person.id] << outfit
+          end
+        end
 
       end
 
@@ -177,7 +237,7 @@ class ClothingSelectionsController < ApplicationController
       #   packing [outfitCat] = true
       #   outfit << outfitCat
       # end
-      if outfit.gender == gender
+      if outfit.gender.downcase == gender.downcase
         outfits << outfit
       end
     end
@@ -195,5 +255,15 @@ class ClothingSelectionsController < ApplicationController
 
     end
     return false
+  end
+
+  def AlreadyHasOutfit(person_id, outfit_id)
+    @outfits[person_id].each do |outfit|
+      if outfit.id == outfit_id
+        return true
+      end
+    end
+    return false
+
   end
 end

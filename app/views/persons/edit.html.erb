@@ -1,7 +1,7 @@
 <div id="centered">
   <h1>Edit A Trip Mate!</h1>
 
-  <%= form_for(@person, url: "/persons/#{@person.id}") do |p| %>
+  <%= form_for(@person, url: "/trips/#{@trip.id}/persons/#{@person.id}") do |p| %>
 
     <div>
       <%=p.label :name %>
@@ -25,8 +25,6 @@
 
 
   <%= submit_tag "All Set!" %>
-
-  <%= link_to "Home", "/trips" %>
 
   <%= link_to "Delete", "/persons/#{@person.id}", method: :delete, data:{confirm: "Are You Sure?"} %>
 

@@ -1,0 +1,33 @@
+<div id="centered" ng-app="app">
+
+  <h1>Add Your Information</h1>
+
+    <%= form_for(@creator, url: "/creators/#{@creator.id}") do |p|%>
+
+        <div>
+          <%=p.label :name %>
+          <%= p.text_field :name %>
+        </div>
+
+        <div>
+          <%=p.label :gender %>
+          <%= p.text_field :gender %>
+        </div>
+
+        <div>
+          <%=p.label :age %>
+          <%= p.text_field :age %>
+        </div>    
+          
+        <div id="errors">
+          <ul>
+            <li ng-repeat="error in errors">{{ error }}</li>
+          </ul>
+        </div> 
+
+
+
+<button ng-click="addPerson(newPerson)">Where Are You Going?</button>
+</div>
+
+<% end %>

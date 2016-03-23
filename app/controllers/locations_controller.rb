@@ -24,11 +24,11 @@ class LocationsController < ApplicationController
 
     @location.save
 
-    p params[:from]
-    p params[:to]
-    p "********************************************"
+    @person = Person.new({trip_id: @location.id, name: current_creator.name, gender: current_creator.gender, age: current_creator.age, creator_id: current_creator.id, email: current_creator.email})
+      
+    @person.save
 
-    flash[:success]= "Location Added"
+
 
     redirect_to controller: 'trips', action: 'show', id: @location.id
 

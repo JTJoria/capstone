@@ -3,6 +3,7 @@ class SituationsController < ApplicationController
   def index
 
     persons = Person.all
+    
 
     @tripmates = []
     @this_trip_id = params[:trip_id].to_i

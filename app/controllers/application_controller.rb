@@ -13,8 +13,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
-  def after_sign_in_path_for(resource)
-    return'/trips'
+  def after_inactive_sign_up_path_for(resource)
+    return"/creators/#{@creator.id}/edit"
   end
+
+  def after_sign_in_path_for(resource)
+    return"/trips"
+  end
+
+
 
 end

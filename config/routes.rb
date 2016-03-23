@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
 root 'creators#index'
 
-  devise_for :creators
+  devise_for :creators, controllers: { registrations: "registrations" }
+
+  get '/creators/:id/edit' => 'creators#edit'
+  patch '/creators/:id' => 'creators#update'
 
 
   get '/persons' => 'persons#index' 
@@ -56,6 +59,10 @@ root 'creators#index'
   get '/trips/:trip_id/persons/new' => 'persons#new'
   post '/trips/:trip_id/persons' => 'persons#create'
   get '/trips/:trip_id/persons' => 'persons#show'
+  get '/trips/:trip_id/persons/:id/edit' => 'persons#edit'
+  patch '/trips/:trip_id/persons/:id' => 'persons#update'
+  get '/trips/:trip_id/persons/:id' => 'persons#show'
+
 
   get '/trips/:trip_id/situations' => 'situations#index'
   get '/trips/:trip_id/situations/new' => 'situations#new'
